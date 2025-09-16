@@ -1,3 +1,25 @@
 spring:
   application:
     name: order-service
+
+# Actuator config
+management:
+  metrics:
+    tags:
+      environment: "development"
+  otlp:
+    logging:
+      export:
+        enabled: true
+      transport: http
+      endpoint: "http://localhost:4318/v1/logs"
+    metrics:
+      export:
+        enabled: true
+        step: 10s
+        url: "http://localhost:4318/v1/metrics"
+    tracing:
+      export:
+        enabled: true
+      transport: http
+      endpoint: "http://localhost:4318/v1/traces"
