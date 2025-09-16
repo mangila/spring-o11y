@@ -8,9 +8,6 @@ GET {{host}}/actuator/health
 ### Metrics
 GET {{host}}/actuator/metrics
 
-### Prometheus metrics
-GET {{host}}/actuator/prometheus
-
 ### Create new order
 POST {{host}}/api/v1/order
 Content-Type: application/json
@@ -26,7 +23,7 @@ Content-Type: application/json
 }
 
 ### Get order by ID
-GET {{host}}/api/v1/order
+GET {{host}}/api/v1/order/123
 Content-Type: application/json
 
 ### Get all orders

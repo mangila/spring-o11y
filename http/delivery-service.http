@@ -1,0 +1,9 @@
+### Delivery Service HTTP Requests
+
+@host = http://localhost:8081
+
+### Health check
+GET {{host}}/actuator/health
+
+### Metrics
+GET {{host}}/actuator/metrics

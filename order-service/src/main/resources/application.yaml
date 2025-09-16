@@ -1,9 +1,32 @@
+# Spring properties
 spring:
   application:
     name: order-service
+  threads:
+    virtual:
+      enabled: true
+
+# OpenTelemetry config
+otel:
+  instrumentation:
+    micrometer:
+      enabled: true
+    logback-appender:
+      enabled: true
+      experimental-log-attributes: true
+      experimental:
+        capture-mdc-attributes: "*"
+# Logging config
+logging:
+  level:
+    root: INFO
 
 # Actuator config
 management:
+  endpoints:
+    web:
+      exposure:
+        include: health, metrics
   metrics:
     tags:
       environment: "development"

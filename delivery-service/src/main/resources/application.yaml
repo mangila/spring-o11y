@@ -1,3 +1,7 @@
+# Spring properties
 spring:
   application:
     name: delivery-service
+# Server properties
+server:
+  port: 8081

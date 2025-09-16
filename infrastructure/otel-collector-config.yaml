@@ -10,7 +10,7 @@ processors:
 
 exporters:
   file:
-    path: /data/otel/otel-data.json
+    path: /data/otel/otel-data.jsonl
     format: json
 
 extensions:
