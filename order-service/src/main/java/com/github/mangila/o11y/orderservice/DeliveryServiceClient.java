@@ -1,5 +1,6 @@
 package com.github.mangila.o11y.orderservice;
 
+import io.micrometer.core.annotation.Timed;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
@@ -11,4 +12,9 @@ public class DeliveryServiceClient {
     public DeliveryServiceClient(@Qualifier("deliveryRestClient") RestClient restClient) {
         this.restClient = restClient;
     }
+
+    public void abc() {
+
+    }
+
 }

@@ -9,9 +9,15 @@ processors:
   batch:
 
 exporters:
+  otlphttp:
+    endpoint: http://loki:3100/otlp
   file:
     path: /data/otel/otel-data.jsonl
     format: json
+  prometheus:
+    endpoint: 0.0.0.0:8889
+  zipkin:
+    endpoint: http://zipkin:9411/api/v2/spans
 
 extensions:
   health_check:
@@ -27,12 +33,12 @@ service:
     traces:
       receivers: [ otlp ]
       processors: [ batch ]
-      exporters: [ file ]
+      exporters: [ file, zipkin ]
     metrics:
       receivers: [ otlp ]
       processors: [ batch ]
-      exporters: [ file ]
+      exporters: [ file, prometheus ]
     logs:
       receivers: [ otlp ]
       processors: [ batch ]
-      exporters: [ file ]
+      exporters: [ otlphttp ]

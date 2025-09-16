@@ -3,6 +3,8 @@ package com.github.mangila.o11y.orderservice;
 import io.micrometer.core.aop.CountedAspect;
 import io.micrometer.core.aop.TimedAspect;
 import io.micrometer.core.instrument.MeterRegistry;
+import io.micrometer.core.instrument.config.NamingConvention;
+import org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -22,6 +24,13 @@ public class Config {
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .defaultHeader(HttpHeaders.USER_AGENT, "Order-Service")
                 .build();
+    }
+
+    @Bean
+    MeterRegistryCustomizer<MeterRegistry> customizer() {
+        return registry -> {
+            registry.config().namingConvention(NamingConvention.snakeCase);
+        };
     }
 
     @Bean
