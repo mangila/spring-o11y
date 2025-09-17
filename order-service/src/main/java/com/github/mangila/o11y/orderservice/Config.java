@@ -1,19 +1,15 @@
 package com.github.mangila.o11y.orderservice;
 
-import io.micrometer.core.aop.CountedAspect;
-import io.micrometer.core.aop.TimedAspect;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.config.NamingConvention;
 import org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestClient;
 
 @Configuration
-@EnableAspectJAutoProxy(proxyTargetClass = true)
 public class Config {
 
     @Bean
@@ -31,15 +27,5 @@ public class Config {
         return registry -> {
             registry.config().namingConvention(NamingConvention.snakeCase);
         };
-    }
-
-    @Bean
-    TimedAspect timedAspect(MeterRegistry meterRegistry) {
-        return new TimedAspect(meterRegistry);
-    }
-
-    @Bean
-    CountedAspect countedAspect(MeterRegistry meterRegistry) {
-        return new CountedAspect(meterRegistry);
     }
 }

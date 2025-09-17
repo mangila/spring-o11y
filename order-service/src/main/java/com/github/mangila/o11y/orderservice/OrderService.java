@@ -1,7 +1,6 @@
 package com.github.mangila.o11y.orderservice;
 
-import io.micrometer.core.annotation.Counted;
-import io.micrometer.core.annotation.Timed;
+import io.micrometer.observation.annotation.Observed;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +10,11 @@ import java.util.UUID;
 @Service
 @Slf4j
 public class OrderService {
-
-    @Counted(value = "order.counted.created")
-    @Timed("order.timed.created")
+    @Observed(
+            name = "order_created",             // metric name
+            contextualName = "create_order",   // shows up in traces
+            lowCardinalityKeyValues = {"operation", "mutation"}
+    )
     public String createOrder() {
         log.info("Creating order");
         String id = UUID.randomUUID().toString();
@@ -21,8 +22,11 @@ public class OrderService {
         return id;
     }
 
-    @Counted(value = "order.counted.find")
-    @Timed("order.timed.find")
+    @Observed(
+            name = "order_find",             // metric name
+            contextualName = "find_order",   // shows up in traces
+            lowCardinalityKeyValues = {"operation", "read"}
+    )
     public Order findById(String id) {
         log.info("Getting order with id {}", id);
         var o = new Order("", "", List.of(), 0.0);

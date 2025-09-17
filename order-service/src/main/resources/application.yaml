@@ -11,33 +11,27 @@ otel:
   instrumentation:
     micrometer:
       enabled: true
+  exporter:
+    otlp:
+      logs:
+        endpoint: "http://localhost:4318/v1/logs"
+        protocol: http/protobuf
+      metrics:
+        endpoint: "http://localhost:4318/v1/metrics"
+        protocol: http/protobuf
+      traces:
+        endpoint: "http://localhost:4317"
+        protocol: grpc
 # Logging config
 logging:
   level:
     root: INFO
-
 # Actuator config
 management:
+  observations:
+    annotations:
+      enabled: true
   endpoints:
     web:
       exposure:
         include: health, metrics
-  tracing:
-    sampling:
-      probability: 1.0
-  otlp:
-    logging:
-      export:
-        enabled: true
-      transport: http
-      endpoint: "http://localhost:4318/v1/logs"
-    metrics:
-      export:
-        enabled: true
-        step: 15s
-        url: "http://localhost:4318/v1/metrics"
-    tracing:
-      export:
-        enabled: true
-      transport: grpc
-      endpoint: "0.0.0.0:4317"
