@@ -1,4 +1,4 @@
-package com.github.mangila.o11y.orderservice;
+package com.github.mangila.o11y.deliveryservice;
 
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.config.NamingConvention;
@@ -16,7 +16,7 @@ public class Config {
     @Bean
     RestClient deliveryRestClient(
             @Value("${spring.application.name}") String applicationName,
-            @Value("${application.integration.delivery-service.url}") String url) {
+            @Value("${application.integration.order-service.url}") String url) {
         return RestClient.builder()
                 .baseUrl(url)
                 .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
@@ -31,4 +31,5 @@ public class Config {
             registry.config().namingConvention(NamingConvention.snakeCase);
         };
     }
+
 }

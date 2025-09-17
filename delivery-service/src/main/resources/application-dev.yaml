@@ -1,0 +1,9 @@
+# OpenTelemetry config
+otel:
+  resource:
+    attributes:
+      service.environment: "dev"
+# Logging config
+logging:
+  level:
+    root: INFO

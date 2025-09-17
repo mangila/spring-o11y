@@ -1,7 +1,44 @@
+# Application properties
+application:
+  integration:
+    order-service:
+      url: "http://localhost:8080"
 # Spring properties
 spring:
   application:
     name: delivery-service
+  threads:
+    virtual:
+      enabled: true
 # Server properties
 server:
   port: 8081
+# OpenTelemetry config
+otel:
+  instrumentation:
+    micrometer:
+      enabled: true
+  exporter:
+    otlp:
+      logs:
+        endpoint: "http://localhost:4318/v1/logs"
+        protocol: http/protobuf
+      metrics:
+        endpoint: "http://localhost:4318/v1/metrics"
+        protocol: http/protobuf
+      traces:
+        endpoint: "http://localhost:4317"
+        protocol: grpc
+# Logging config
+logging:
+  level:
+    root: WARN
+# Actuator config
+management:
+  observations:
+    annotations:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health, metrics

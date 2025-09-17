@@ -1,3 +1,9 @@
+# Application properties
+application:
+  integration:
+    delivery-service:
+      url: "http://localhost:8081"
+
 # Spring properties
 spring:
   application:
@@ -25,7 +31,7 @@ otel:
 # Logging config
 logging:
   level:
-    root: INFO
+    root: WARN
 # Actuator config
 management:
   observations:
