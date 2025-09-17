@@ -11,6 +11,7 @@ OTel-collector is configured to route to, fulfilling the three pillars of observ
 - Loki (Logs)-localhost:3100
 - Prometheus (Metrics)—localhost:9090
 - Zipkin (Traces)—localhost:9411
+- File (debugging purposes)
 
 ## Visualisation
 
