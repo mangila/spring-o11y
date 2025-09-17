@@ -17,4 +17,4 @@ OTel-collector is configured to route to, fulfilling the three pillars of observ
 
 Grafana is provisioned with the datasource and dashboards to visualize the data.
 
-- Grafana
+- Grafana-localhost:3000
