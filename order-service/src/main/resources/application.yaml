@@ -11,10 +11,6 @@ otel:
   instrumentation:
     micrometer:
       enabled: true
-    logback-appender:
-      experimental-log-attributes: true
-      experimental:
-        capture-mdc-attributes: "*"
 # Logging config
 logging:
   level:
@@ -26,6 +22,9 @@ management:
     web:
       exposure:
         include: health, metrics
+  tracing:
+    sampling:
+      probability: 1.0
   otlp:
     logging:
       export:
@@ -35,10 +34,10 @@ management:
     metrics:
       export:
         enabled: true
-        step: 1s
+        step: 15s
         url: "http://localhost:4318/v1/metrics"
     tracing:
       export:
         enabled: true
-      transport: http
-      endpoint: "http://localhost:4318/v1/traces"
+      transport: grpc
+      endpoint: "0.0.0.0:4317"

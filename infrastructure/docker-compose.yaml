@@ -8,15 +8,18 @@ services:
       - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
       - GF_AUTH_DISABLE_LOGIN_FORM=true
     volumes:
-      - ./grafana-datasources.yaml:/etc/grafana/provisioning/datasources/datasources.yaml
+      - ./grafana/datasources.yaml:/etc/grafana/provisioning/datasources/datasources.yaml
+      - ./grafana/dashboards.yaml:/etc/grafana/provisioning/dashboards/dashboards.yaml
+      - ./grafana/dashboard.json:/var/lib/grafana/dashboards/dashboard.json
     networks:
-      - monitoring
+      - o11y-network
 
   otel-collector:
     image: otel/opentelemetry-collector-contrib:latest
+    container_name: otel-collector
     volumes:
-      - ./otel-collector-config.yaml:/etc/otelcol-contrib/config.yaml
-      - ./otel-data:/data/otel
+      - ./otel-collector/config.yaml:/etc/otelcol-contrib/config.yaml
+      - ./otel-collector/data:/data/otel
     ports:
       - 1888:1888 # pprof extension
       - 8888:8888 # Prometheus metrics exposed by the Collector
@@ -26,7 +29,7 @@ services:
       - 4318:4318 # OTLP http receiver
       - 55679:55679 # zpages extension
     networks:
-      - monitoring
+      - o11y-network
 
   grafana-loki:
     image: grafana/loki:latest
@@ -38,7 +41,7 @@ services:
     volumes:
       - ./loki-config.yaml:/etc/loki/local-config.yaml
     networks:
-      - monitoring
+      - o11y-network
 
   zipkin:
     image: openzipkin/zipkin:latest
@@ -48,25 +51,18 @@ services:
     ports:
       - "9411:9411"
     networks:
-      - monitoring
+      - o11y-network
 
   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus
     ports:
       - "9090:9090"
-    command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-      - '--web.enable-remote-write-receiver'
-      - '--storage.tsdb.path=/prometheus'
-      - '--enable-feature=remote-write-receiver'
-      - '--web.enable-admin-api'
-      - '--web.enable-lifecycle'
-      - '--enable-feature=agent'
-      - '--web.config.file='
+    volumes:
+      - ./prometheus-config.yaml:/etc/prometheus/prometheus.yml
     networks:
-      - monitoring
+      - o11y-network
 
 networks:
-  monitoring:
+  o11y-network:
     driver: bridge

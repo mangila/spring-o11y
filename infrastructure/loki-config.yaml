@@ -6,6 +6,12 @@ server:
   log_level: debug
   grpc_server_max_concurrent_streams: 1000
 
+distributor:
+  otlp_config:
+    default_resource_attributes_as_index_labels:
+      - "service.name"
+      - "service.instance.id"
+      - "service.environment"
 common:
   instance_addr: 127.0.0.1
   path_prefix: /tmp/loki
