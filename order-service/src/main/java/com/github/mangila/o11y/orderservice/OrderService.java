@@ -40,7 +40,7 @@ public class OrderService {
                 "Street 123",
                 "IN_PROGRESS",
                 2.0);
-        rabbitTemplate.convertAndSend("new-order-delivery", objectMapper.createObjectNode()
+        rabbitTemplate.convertAndSend(Config.NEW_ORDER_TO_DELIVERY_QUEUE, objectMapper.createObjectNode()
                 .put("id", order.id())
                 .put("address", order.address())
                 .toString());

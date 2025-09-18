@@ -8,7 +8,11 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class OrderListener {
 
-    @RabbitListener(queues = "new-order-delivery",containerFactory = "rabbitListenerContainerFactory")
+    @RabbitListener(
+            queues = "new-order-to-delivery-queue",
+            containerFactory = "rabbitListenerContainerFactory",
+            executor = "applicationTaskExecutor" // run in a Virtual Thread
+    )
     public void listen(String s) {
         log.info("Received message: {}", s);
     }
