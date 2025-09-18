@@ -3,6 +3,7 @@ application:
   integration:
     delivery-service:
       url: "http://localhost:8081"
+      basepath: "/api/v1/delivery"
 
 # Spring properties
 spring:
@@ -11,6 +12,13 @@ spring:
   threads:
     virtual:
       enabled: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: myuser
+    password: secret
+    template:
+      observation-enabled: true
 
 # OpenTelemetry config
 otel:

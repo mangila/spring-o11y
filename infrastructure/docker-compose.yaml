@@ -64,6 +64,17 @@ services:
     networks:
       - o11y-network
 
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:latest
+    environment:
+      - 'RABBITMQ_DEFAULT_PASS=secret'
+      - 'RABBITMQ_DEFAULT_USER=myuser'
+    ports:
+      - '5672:5672'
+    networks:
+      - o11y-network
+
 networks:
   o11y-network:
     driver: bridge

@@ -31,5 +31,4 @@ public class Config {
             registry.config().namingConvention(NamingConvention.snakeCase);
         };
     }
-
 }
