@@ -2,6 +2,7 @@ package com.github.mangila.o11y.deliveryservice;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import io.micrometer.observation.annotation.Observed;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,10 @@ public class DeliveryService {
         this.objectMapper = objectMapper;
     }
 
+    @Observed(
+            name = "delivery_find",
+            lowCardinalityKeyValues = {"operation", "query"}
+    )
     public String getDelivery(String orderId) {
         Delivery delivery = database.findById(orderId);
         log.info("Delivery found: {}", delivery);
@@ -29,7 +34,11 @@ public class DeliveryService {
         return json.toString();
     }
 
-    public boolean fullFill(String orderId) {
+    @Observed(
+            name = "delivery_fulfill",
+            lowCardinalityKeyValues = {"operation", "mutation"}
+    )
+    public boolean fulfill(String orderId) {
         Delivery delivery = database.findById(orderId);
         if (delivery == null) {
             return false;

@@ -12,5 +12,5 @@ GET {{host}}/actuator/metrics
 GET {{host}}/api/v1/delivery/ebc9d5a8-f37a-4919-a7d1-589cd2a3da1b
 Content-Type: application/json
 
-### Fullfill Delivery
+### Fulfill Delivery
 POST {{host}}/api/v1/delivery/ebc9d5a8-f37a-4919-a7d1-589cd2a3da1b

@@ -25,8 +25,8 @@ public class DeliveryController {
     }
 
     @PostMapping("{orderId}")
-    public ResponseEntity<?> fullFillDelivery(@PathVariable String orderId) {
-        boolean result = deliveryService.fullFill(orderId);
+    public ResponseEntity<?> fulfillDelivery(@PathVariable String orderId) {
+        boolean result = deliveryService.fulfill(orderId);
         if (!result) {
             return ResponseEntity.notFound().build();
         }
