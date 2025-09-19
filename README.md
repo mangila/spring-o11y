@@ -10,7 +10,11 @@ Fulfilling the three pillars of observability:
 - Metrics
 - Traces
 
-to start everything, run the docker-compose file located in /infrastructure
+# How to run
+
+- Start the infra (docker-compose) located in /infrastructure
+- Start the applications
+- Send some requests via .http files located in /http
 
 ## o11y backends
 
