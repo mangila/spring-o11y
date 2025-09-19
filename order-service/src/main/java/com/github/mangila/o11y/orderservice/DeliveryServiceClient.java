@@ -1,6 +1,5 @@
 package com.github.mangila.o11y.orderservice;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.micrometer.observation.annotation.Observed;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,15 +15,12 @@ public class DeliveryServiceClient {
     private final RestClient restClient;
     private final String basePath;
 
-    private final ObjectMapper objectMapper;
 
     public DeliveryServiceClient(@Qualifier("deliveryRestClient") RestClient restClient,
-                                 @Value("${application.integration.delivery-service.basepath}") String basePath,
-                                 ObjectMapper objectMapper) {
+                                 @Value("${application.integration.delivery-service.basepath}") String basePath) {
         Assert.hasText(basePath, "`application.integration.delivery-service.basepath` must be set");
         this.restClient = restClient;
         this.basePath = basePath;
-        this.objectMapper = objectMapper;
     }
 
     public ObjectNode getDelivery(String orderId) {

@@ -2,11 +2,19 @@
 
 Spring boot web application demonstrating usage with OTel-collector to route to different o11y backends
 
+Design for Observability
+
+Fulfilling the three pillars of observability:
+
+- Logs
+- Metrics
+- Traces
+
 to start everything, run the docker-compose file located in /infrastructure
 
 ## o11y backends
 
-OTel-collector is configured to route to, fulfilling the three pillars of observability:
+OTel-collector is configured to route to
 
 - Loki (Logs)-localhost:3100
 - Prometheus (Metrics)—localhost:9090

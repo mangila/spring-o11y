@@ -51,6 +51,9 @@ public class OrderService {
         return id;
     }
 
+    /**
+     * Find an order by its id and enrich it with the delivery address and status, from the delivery service.
+     */
     @Observed(
             name = "order_find",
             lowCardinalityKeyValues = {"operation", "query"}

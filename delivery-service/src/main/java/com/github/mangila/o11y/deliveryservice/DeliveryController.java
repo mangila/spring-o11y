@@ -13,7 +13,9 @@ public class DeliveryController {
         this.deliveryService = deliveryService;
     }
 
-    @GetMapping("{orderId}")
+    @GetMapping(
+            value = "{orderId}",
+            produces = "application/json")
     public ResponseEntity<String> getDelivery(@PathVariable String orderId) {
         String deliveryJson = deliveryService.getDelivery(orderId);
         if (deliveryJson.isEmpty()) {

@@ -3,7 +3,6 @@ package com.github.mangila.o11y.deliveryservice;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,8 +13,7 @@ public class DeliveryService {
     private final ObjectMapper objectMapper;
 
     public DeliveryService(MemoryDatabase database,
-                           ObjectMapper objectMapper,
-                           RabbitTemplate rabbitTemplate) {
+                           ObjectMapper objectMapper) {
         this.database = database;
         this.objectMapper = objectMapper;
     }
