@@ -18,7 +18,7 @@ public class Config {
     RestClient deliveryRestClient(
             @Value("${spring.application.name}") String applicationName,
             @Value("${application.integration.order-service.url}") String url) {
-        Assert.hasText(applicationName, "`application.integration.order-service.url` must be set");
+        Assert.hasText(applicationName, "`spring.application.name` must be set");
         Assert.hasText(url, "`application.integration.order-service.url` must be set");
         return RestClient.builder()
                 .baseUrl(url)

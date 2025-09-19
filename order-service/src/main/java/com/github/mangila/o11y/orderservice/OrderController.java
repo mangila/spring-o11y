@@ -15,16 +15,16 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @PostMapping
-    public ResponseEntity<String> createOrder() {
-        String id = orderService.createOrder();
+    @PostMapping(consumes = "application/json")
+    public ResponseEntity<String> createNewOrder(@RequestBody CreateNewOrderRequest request) {
+        log.info("Creating new order {}", request);
+        String id = orderService.createNewOrder(request);
         return ResponseEntity.ok(id);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Order> findOrder(@PathVariable("id") String id) {
-        Order order = orderService.findById(id);
-        return ResponseEntity.ok(order);
+    @GetMapping("/{orderId}")
+    public ResponseEntity<OrderDto> findOrder(@PathVariable String orderId) {
+        return ResponseEntity.ok(orderService.findById(orderId));
     }
 
 }

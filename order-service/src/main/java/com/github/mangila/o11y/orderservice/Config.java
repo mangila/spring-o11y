@@ -18,7 +18,7 @@ public class Config {
     public static final String NEW_ORDER_TO_DELIVERY_QUEUE = "new-order-to-delivery-queue";
 
     @Bean
-    public Queue newOrderDeliveryQueue() {
+    public Queue createNewOrderToDeliveryQueue() {
         return new Queue(NEW_ORDER_TO_DELIVERY_QUEUE, Boolean.FALSE);
     }
 
@@ -26,7 +26,7 @@ public class Config {
     RestClient deliveryRestClient(
             @Value("${spring.application.name}") String applicationName,
             @Value("${application.integration.delivery-service.url}") String url) {
-        Assert.hasText(applicationName, "`application.integration.delivery-service.url` must be set");
+        Assert.hasText(applicationName, "`spring.application.name` must be set");
         Assert.hasText(url, "`application.integration.delivery-service.url` must be set");
         return RestClient.builder()
                 .baseUrl(url)

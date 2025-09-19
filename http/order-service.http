@@ -15,17 +15,17 @@ Content-Type: application/json
 {
   "customerId": "123",
   "items": [
-    {
-      "productId": "456",
-      "quantity": 2
-    }
-  ]
+    "Mithril",
+    "The One Ring",
+    "Andúril, Flame of the West"
+  ],
+  "address": "Street 123"
 }
 
-### Get order by ID
-GET {{host}}/api/v1/order/123
-Content-Type: application/json
+> {%
+    client.global.set("orderId", response.body)
+%}
 
-### Get all orders
-GET {{host}}/api/v1/order
+### Get order by ID
+GET {{host}}/api/v1/order/{{orderId}}
 Content-Type: application/json
