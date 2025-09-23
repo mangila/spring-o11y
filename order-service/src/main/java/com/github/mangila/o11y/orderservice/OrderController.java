@@ -1,6 +1,7 @@
 package com.github.mangila.o11y.orderservice;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistry;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 public class OrderController {
 
+    RabbitListenerEndpointRegistry registry;
     private final OrderService orderService;
 
     public OrderController(OrderService orderService) {
