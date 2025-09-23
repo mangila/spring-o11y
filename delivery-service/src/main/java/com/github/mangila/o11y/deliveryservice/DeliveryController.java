@@ -24,7 +24,7 @@ public class DeliveryController {
         return ResponseEntity.ok(deliveryJson);
     }
 
-    @PostMapping("{orderId}")
+    @PostMapping(value = "{orderId}")
     public ResponseEntity<?> fulfillDelivery(@PathVariable String orderId) {
         boolean result = deliveryService.fulfill(orderId);
         if (!result) {

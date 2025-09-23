@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.task.TaskExecutor;
+import org.springframework.core.task.VirtualThreadTaskExecutor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.util.Assert;
@@ -33,5 +35,10 @@ public class Config {
         return registry -> {
             registry.config().namingConvention(NamingConvention.snakeCase);
         };
+    }
+
+    @Bean
+    TaskExecutor rabbitListenerExecutor() {
+        return new VirtualThreadTaskExecutor("rabbitmq-listener-");
     }
 }

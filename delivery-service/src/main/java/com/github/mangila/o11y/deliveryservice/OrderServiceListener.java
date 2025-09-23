@@ -23,7 +23,7 @@ public class OrderServiceListener {
     @RabbitListener(
             queues = "new-order-to-delivery-queue",
             containerFactory = "rabbitListenerContainerFactory",
-            executor = "applicationTaskExecutor" // run in a Virtual Thread
+            executor = "rabbitListenerExecutor"
     )
     public void listen(String s) {
         log.info("Received message: {}", s);

@@ -1,8 +1,11 @@
 package com.github.mangila.o11y.orderservice;
 
+import com.rabbitmq.client.ConnectionFactory;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.config.NamingConvention;
 import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer;
 import org.springframework.context.annotation.Bean;
